@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Tocality;
 use Illuminate\Http\Request;
+use GrahamCampbell\ResultType\Success;
+use App\Http\Resources\Tocality as ResourceTocality;
 
 class TocalityController extends Controller
 {
@@ -17,7 +19,7 @@ class TocalityController extends Controller
         //
 /***pour lister mes données par ordre decroissant */
 
-return Tocality::orderByDesc('created_at')->get();
+return ResourceTocality::collection(Tocality::orderByDesc('created_at')->get());
 
 /**pour lister mes donnes normalement */        
       /*   $tocality = Tocality::all(); */
@@ -54,7 +56,7 @@ return Tocality::orderByDesc('created_at')->get();
     public function show(Tocality $tocality)
     {
         /**permet de cibler un element**/
-        return $tocality;
+        return new ResourceTocality($tocality);
     }
 
     /**
@@ -67,8 +69,13 @@ return Tocality::orderByDesc('created_at')->get();
     public function update(Request $request, Tocality $tocality)
     {
         /**Mettre a jour un element**/
-
-        $tocality->update($request->all());
+      if ($tocality->update($request->all())) {
+        /**si post créé envoyer un message */
+         return response()->json([
+             'success' => 'Actualité Modifiée avec succés'
+         ],200);
+ 
+       } 
     }
 
     /**
@@ -79,6 +86,12 @@ return Tocality::orderByDesc('created_at')->get();
      */
     public function destroy(Tocality $tocality)
     {
-        //
+        /**pour supprimer**/
+        ;
+        if ($tocality->delete()) {
+            return response()->json([
+               'Success'=> 'message supprimer bravos!'
+            ]);
+        };
     }
 }
