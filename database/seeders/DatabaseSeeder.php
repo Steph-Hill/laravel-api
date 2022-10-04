@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use App\Models\Tocality;
 use Illuminate\Database\Seeder;
 
@@ -17,5 +18,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         Tocality::factory(30)->create();
+
+        //User::factory(3)->create();
     }
 }

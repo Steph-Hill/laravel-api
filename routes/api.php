@@ -20,6 +20,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::middleware('auth:api')->group(function(){
+    
+    Route::apiResource('tocality',TocalityController::class);
 
+});
 
-Route::apiResource('tocality',TocalityController::class);
