@@ -56,7 +56,7 @@ return ResourceTocality::collection(Tocality::orderByDesc('created_at')->get());
     public function show(Tocality $tocality)
     {
         /**permet de cibler un element**/
-        return new ResourceTocality($tocality);
+        return new ResourceTocality($tocality); 
     }
 
     /**

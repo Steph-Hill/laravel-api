@@ -16,7 +16,7 @@ class CreateTocalitiesTable extends Migration
         Schema::create('tocalities', function (Blueprint $table) {
             $table->id();
             $table->string( 'title', 255);
-            $table->text('content');
+            $table->text('content'); 
             $table->timestamps();
         });
     }
